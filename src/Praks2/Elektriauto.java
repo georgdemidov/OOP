@@ -7,12 +7,12 @@ public class Elektriauto {
     private int sõiduulatus;
     private Elektrijaam elektrijaam;
 
-    Elektriauto(String mark, double kulu, int laadimiskestvus, int maxpikkus, String nimi){
+    Elektriauto(String mark, double kulu, int laadimiskestvus, int maxpikkus, Elektrijaam hind){
         this.automark = mark;
         this.elektrikulu = kulu;
         this.laadimisaeg = laadimiskestvus;
         this.sõiduulatus = maxpikkus;
-        this.elektrijaam = nimi;
+        this.elektrijaam = hind;
     }
 
     public int getLaadimisaeg() {
@@ -20,7 +20,11 @@ public class Elektriauto {
     }
 
     public void setLaadimisaeg(int laadimisaeg) {
-        this.laadimisaeg = laadimisaeg;
+        if (laadimisaeg > 0){
+            this.laadimisaeg = laadimisaeg;
+        }else{
+            System.out.println("Sisestage sobivad andmed!");
+        }
     }
 
     public Elektrijaam getElektrijaam() {
@@ -32,11 +36,27 @@ public class Elektriauto {
     }
 
     public double maksumus100(){
-        Elektrijaam hind = new Elektrijaam();
-        return elektrikulu * hind;
+        return elektrikulu * getElektrijaam();
     }
 
     public double maksumus(int teepikkus){
+        return teepikkus * maksumus100() / 100;
+    }
 
+    public double reisiKestus(int teepikkus, double keskmineKiirus){
+        return ((teepikkus/sõiduulatus)*laadimisaeg + teepikkus/keskmineKiirus);
+    }
+
+    public String toString(){
+        return "Antud elektriauto automark on " + automark + ". Selle auto elektrikulu on " + elektrikulu + " kwh/100km, aku laadimiskestvus on " + laadimisaeg + "minutit ning maksimaalne sõiduulatus " + sõiduulatus + ". Samuti on selle auto sajakilomeetrilise reisi maksumus " + maksumus100();
+    }
+
+    public static void main(String[] args) {
+        Elektrijaam elektrijaam = new Elektrijaam(0.30);
+        Elektriauto Volkswagen = new Elektriauto("Volkswagen e-up!", 1, 300, 120, elektrijaam);
+        System.out.println(Volkswagen.toString());
+        System.out.println(Volkswagen.maksumus(1000));
+        System.out.println(Volkswagen.maksumus100());
+        System.out.println(Volkswagen.reisiKestus(200, 110.5));
     }
 }

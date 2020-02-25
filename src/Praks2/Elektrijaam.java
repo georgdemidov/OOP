@@ -14,6 +14,4 @@ public class Elektrijaam {
     public void setElektriHind(double elektriHind) {
         this.elektriHind = elektriHind;
     }
-
-
 }

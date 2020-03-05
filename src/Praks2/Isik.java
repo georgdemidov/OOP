@@ -1,10 +1,10 @@
 package Praks2;
 
 public class Isik {
-    String nimi;
-    double pikkus;
-    String isikukood;
-    int mass;
+    private String nimi;
+    private double pikkus;
+    private String isikukood;
+    private int mass;
 
     Isik(String isikuNimi, double isikuPikkus, String idkood, int kaal){
         nimi = isikuNimi;

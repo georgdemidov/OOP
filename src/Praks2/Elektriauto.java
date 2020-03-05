@@ -35,28 +35,19 @@ public class Elektriauto {
         this.elektrijaam = elektrijaam;
     }
 
-    public double maksumus100(){
-        return elektrikulu * getElektrijaam();
-    }
-
-    public double maksumus(int teepikkus){
-        return teepikkus * maksumus100() / 100;
-    }
 
     public double reisiKestus(int teepikkus, double keskmineKiirus){
         return ((teepikkus/sõiduulatus)*laadimisaeg + teepikkus/keskmineKiirus);
     }
 
     public String toString(){
-        return "Antud elektriauto automark on " + automark + ". Selle auto elektrikulu on " + elektrikulu + " kwh/100km, aku laadimiskestvus on " + laadimisaeg + "minutit ning maksimaalne sõiduulatus " + sõiduulatus + ". Samuti on selle auto sajakilomeetrilise reisi maksumus " + maksumus100();
+        return "Antud elektriauto automark on " + automark + ". Selle auto elektrikulu on " + elektrikulu + " kwh/100km, aku laadimiskestvus on " + laadimisaeg + "minutit ning maksimaalne sõiduulatus " + sõiduulatus + ". Samuti on selle auto sajakilomeetrilise reisi maksumus ";
     }
 
     public static void main(String[] args) {
         Elektrijaam elektrijaam = new Elektrijaam(0.30);
         Elektriauto Volkswagen = new Elektriauto("Volkswagen e-up!", 1, 300, 120, elektrijaam);
         System.out.println(Volkswagen.toString());
-        System.out.println(Volkswagen.maksumus(1000));
-        System.out.println(Volkswagen.maksumus100());
         System.out.println(Volkswagen.reisiKestus(200, 110.5));
     }
 }
